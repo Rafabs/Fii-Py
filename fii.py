@@ -45,7 +45,17 @@ app.layout = dbc.Container([
             dbc.Button("Calcular", id="calcular-button", n_clicks=0, color="primary", className="mt-4")
         ])
     ]),
-    html.Div(id="resultado-container", className="mt-4")
+    html.Div(id="resultado-container", className="mt-4"),
+    # Footer
+    dbc.NavbarSimple(
+        children=[
+            dbc.NavItem(f"Desenvolvido por Rafael Barbosa | 2023")
+        ],
+        color="dark",
+        dark=True,
+        className="mt-4",
+        style={"position": "absolute", "bottom": 0, "width": "100%"}
+    )    
 ], fluid=True)
 
 @app.callback(
