@@ -3,11 +3,6 @@ import dash
 from dash import dcc, html
 import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output
-import dash_bootstrap_components.themes
-
-available_themes = [
-
-]
 
 def obter_valor_atual(fundo):
     ticker = f"{fundo}.SA"
@@ -25,7 +20,7 @@ def calcular_ponto_medio(valor_compra, valor_venda):
 def calcular_lucro_prejuizo(valor_compra, valor_venda, quantidade_cotas):
     return (valor_venda - valor_compra) * quantidade_cotas
 
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+app = dash.Dash(__name__)
 
 app.layout = dbc.Container([
     html.H1("Análise de Fundos Imobiliários", className="mt-5"),
@@ -61,10 +56,9 @@ app.layout = dbc.Container([
         dash.dependencies.State("input-valor-compra", "value"),
         dash.dependencies.State("input-valor-venda", "value"),
         dash.dependencies.State("input-quantidade-cotas", "value"),
-        dash.dependencies.State("theme-dropdown", "value")  # Novo estado para obter o valor do dropdown
     ],
 )
-def calcular_e_mostrar_resultado(n_clicks, fundo, valor_compra, valor_venda, quantidade_cotas, selected_theme):
+def calcular_e_mostrar_resultado(n_clicks, fundo, valor_compra, valor_venda, quantidade_cotas):
     if n_clicks > 0:
         valor_atual = obter_valor_atual(fundo)
         if valor_atual is not None:
