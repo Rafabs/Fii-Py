@@ -2,6 +2,10 @@
 
 Este é um aplicativo web desenvolvido em Python com o uso da biblioteca Dash e Dash Bootstrap Components para análise de Fundos Imobiliários (FIIs). O aplicativo permite que o usuário insira os dados de um FII, como código do fundo, valor de compra, valor de venda e quantidade de cotas, e calcula o valor atual do fundo, o ponto médio da operação e o lucro ou prejuízo da transação.
 
+## Em Desenvolvimento
+
+Este projeto está em constante atualização, e novas funcionalidades, melhorias e correções podem ser adicionadas ao longo do tempo. Fique à vontade para contribuir com sugestões e melhorias.
+
 ## Instalação
 
 Para executar o aplicativo, você precisará ter o Python e o pip instalados em seu ambiente.
