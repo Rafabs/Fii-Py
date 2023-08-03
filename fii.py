@@ -46,6 +46,7 @@ app.layout = dbc.Container([
         ])
     ]),
     html.Div(id="resultado-container", className="mt-4"),
+    
     # Footer
     dbc.NavbarSimple(
         children=[
