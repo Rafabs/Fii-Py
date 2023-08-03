@@ -46,7 +46,7 @@ app.layout = dbc.Container([
         ])
     ]),
     html.Div(id="resultado-container", className="mt-4"),
-    
+
     # Footer
     dbc.NavbarSimple(
         children=[
@@ -55,7 +55,7 @@ app.layout = dbc.Container([
         color="dark",
         dark=True,
         className="mt-4",
-        style={"position": "absolute", "bottom": 0, "width": "100%"}
+        style={"position": "fixed", "bottom": 0, "width": "100%"}
     )    
 ], fluid=True)
 
