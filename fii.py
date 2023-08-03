@@ -47,18 +47,6 @@ app.layout = dbc.Container([
             dcc.Input(id="input-quantidade-cotas", type="number", value="", style={"width": "100%"})
         ]),
         dbc.Col([
-            html.Label("Escolha o tema:"),
-            dcc.Dropdown(
-                id="theme-dropdown",
-                options=[
-                    {"label": "BOOTSTRAP", "value": dbc.themes.BOOTSTRAP},
-                    {"label": "CERULEAN", "value": dbc.themes.CERULEAN},
-                    
-                    # Adicione outras opções de temas aqui, se desejar
-                ],
-                value=dbc.themes.BOOTSTRAP,
-                style={"width": "100%"}
-            ),
             dbc.Button("Calcular", id="calcular-button", n_clicks=0, color="primary", className="mt-4")
         ])
     ]),
