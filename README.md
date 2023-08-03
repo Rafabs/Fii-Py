@@ -20,14 +20,14 @@ Para executar o aplicativo, você precisará ter o Python e o pip instalados em 
     ```bash
     pip install -r requirements.txt
 
-4. Executando o Aplicativo
+## Executando o Aplicativo
     Após instalar as dependências, você pode executar o aplicativo localmente:
 
     ```bash
     python app.py
 O aplicativo será executado e estará disponível em http://127.0.0.1:8050/ no seu navegador.
 
-5. Uso
+## Uso
     No navegador, acesse http://127.0.0.1:8050/.
 
     Insira o código do FII no campo "Código do Fundo".
@@ -38,11 +38,11 @@ O aplicativo será executado e estará disponível em http://127.0.0.1:8050/ no 
 
     O resultado será exibido na seção abaixo do botão "Calcular", mostrando o valor atual do FII, o ponto médio da operação e o lucro ou prejuízo obtido.
 
-6. Dependências
+## Dependências
     Dash
     Dash Bootstrap Components
     Contribuição
     Se você quiser contribuir com melhorias ou correções, fique à vontade para criar um fork deste repositório, fazer as alterações desejadas e enviar um pull request. Será um prazer revisar e mesclar suas contribuições.
 
-7. Licença
+## Licença
     Este projeto está licenciado sob a MIT License.
