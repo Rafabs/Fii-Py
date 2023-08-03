@@ -1,0 +1,102 @@
+import yfinance as yf
+import dash
+from dash import dcc, html
+import dash_bootstrap_components as dbc
+from dash.dependencies import Input, Output
+import dash_bootstrap_components.themes
+
+available_themes = [
+
+]
+
+def obter_valor_atual(fundo):
+    ticker = f"{fundo}.SA"
+    fundo_info = yf.Ticker(ticker)
+
+    try:
+        valor_atual = fundo_info.history(period="1d")["Close"].iloc[-1]
+        return valor_atual
+    except:
+        return None
+
+def calcular_ponto_medio(valor_compra, valor_venda):
+    return (valor_compra + valor_venda) / 2
+
+def calcular_lucro_prejuizo(valor_compra, valor_venda, quantidade_cotas):
+    return (valor_venda - valor_compra) * quantidade_cotas
+
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+
+app.layout = dbc.Container([
+    html.H1("Análise de Fundos Imobiliários", className="mt-5"),
+    dbc.Row([
+        dbc.Col([
+            html.Label("Código do Fundo:"),
+            dcc.Input(id="input-fundo", type="text", value="", style={"width": "100%"})
+        ]),
+        dbc.Col([
+            html.Label("Valor de Compra:"),
+            dcc.Input(id="input-valor-compra", type="number", value="", style={"width": "100%"})
+        ]),
+        dbc.Col([
+            html.Label("Valor de Venda:"),
+            dcc.Input(id="input-valor-venda", type="number", value="", style={"width": "100%"})
+        ]),
+        dbc.Col([
+            html.Label("Quantidade de Cotas:"),
+            dcc.Input(id="input-quantidade-cotas", type="number", value="", style={"width": "100%"})
+        ]),
+        dbc.Col([
+            html.Label("Escolha o tema:"),
+            dcc.Dropdown(
+                id="theme-dropdown",
+                options=[
+                    {"label": "BOOTSTRAP", "value": dbc.themes.BOOTSTRAP},
+                    {"label": "CERULEAN", "value": dbc.themes.CERULEAN},
+                    
+                    # Adicione outras opções de temas aqui, se desejar
+                ],
+                value=dbc.themes.BOOTSTRAP,
+                style={"width": "100%"}
+            ),
+            dbc.Button("Calcular", id="calcular-button", n_clicks=0, color="primary", className="mt-4")
+        ])
+    ]),
+    html.Div(id="resultado-container", className="mt-4")
+], fluid=True)
+
+@app.callback(
+    Output("resultado-container", "children"),
+    [Input("calcular-button", "n_clicks")],
+    [
+        dash.dependencies.State("input-fundo", "value"),
+        dash.dependencies.State("input-valor-compra", "value"),
+        dash.dependencies.State("input-valor-venda", "value"),
+        dash.dependencies.State("input-quantidade-cotas", "value"),
+        dash.dependencies.State("theme-dropdown", "value")  # Novo estado para obter o valor do dropdown
+    ],
+)
+def calcular_e_mostrar_resultado(n_clicks, fundo, valor_compra, valor_venda, quantidade_cotas, selected_theme):
+    if n_clicks > 0:
+        valor_atual = obter_valor_atual(fundo)
+        if valor_atual is not None:
+            ponto_medio = calcular_ponto_medio(valor_compra, valor_venda)
+            lucro_prejuizo = calcular_lucro_prejuizo(valor_compra, valor_venda, quantidade_cotas)
+
+            resultado_text = f"Valor atual do fundo {fundo}: R${valor_atual:.2f}\n"
+            resultado_text += f"Ponto médio da operação: R${ponto_medio:.2f}\n"
+
+            if lucro_prejuizo > 0:
+                resultado_text += f"Lucro da operação: R${lucro_prejuizo:.2f}\n"
+            elif lucro_prejuizo < 0:
+                resultado_text += f"Prejuízo da operação: R${abs(lucro_prejuizo):.2f}\n"
+            else:
+                resultado_text += f"A operação ficou no ponto de equilíbrio. Não houve lucro nem prejuízo."
+
+            return html.Div([dcc.Markdown(resultado_text)], style={"margin-top": "20px"})
+
+        else:
+            return html.Div([html.H4(f"Fundo '{fundo}' não encontrado ou não disponível no Yahoo Finance.")])
+
+if __name__ == "__main__":
+    app.run_server(debug=True)
