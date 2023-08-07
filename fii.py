@@ -20,7 +20,7 @@ def calcular_ponto_medio(valor_compra, valor_venda):
 def calcular_lucro_prejuizo(valor_compra, valor_venda, quantidade_cotas):
     return (valor_venda - valor_compra) * quantidade_cotas
 
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.CYBORG])
 
 app.layout = dbc.Container([
     html.H1("Análise de Fundos Imobiliários", className="h1"),
