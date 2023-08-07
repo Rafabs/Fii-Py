@@ -41,15 +41,15 @@ app.layout = dbc.Container([
             dcc.Input(id="input-valor-compra", type="number", value="", className="input-field")
         ]),
         dbc.Col([
+            html.Label("Cotas Compra:", className="label"),
+            dcc.Input(id="input-cotas-compradas", type="number", value="", className="input-field")
+        ]),        
+        dbc.Col([
             html.Label("Valor de Venda:", className="label"),
             dcc.Input(id="input-valor-venda", type="number", value="", className="input-field")
         ]),
         dbc.Col([
-            html.Label("Cotas Compradas:", className="label"),
-            dcc.Input(id="input-cotas-compradas", type="number", value="", className="input-field")
-        ]),
-        dbc.Col([
-            html.Label("Cotas para Venda:", className="label"),
+            html.Label("Cotas Venda:", className="label"),
             dcc.Input(id="input-cotas-venda", type="number", value="", className="input-field")
         ]),
         dbc.Col([

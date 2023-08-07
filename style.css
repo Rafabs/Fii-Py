@@ -56,6 +56,15 @@ label {
   margin-bottom: 5px;
 }
 
+.label_venda {
+  margin-bottom: 5px;
+  color: #ff0000; 
+}
+
+.label_compra {
+  margin-bottom: 5px;
+  color: #00ff04; 
+}
 /* Adjust margin for container */
 .container {
   margin-top: 50px;
