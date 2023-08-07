@@ -3,6 +3,7 @@ import dash
 from dash import dcc, html
 import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output
+from fund_list import fund_options  # Import the list of fund options
 
 def obter_valor_atual(fundo):
     ticker = f"{fundo}.SA"
@@ -26,8 +27,8 @@ app.layout = dbc.Container([
     html.H1("Análise de Fundos Imobiliários", className="h1"),
     dbc.Row([
         dbc.Col([
-            html.Label("Código do Fundo:", className="label"),
-            dcc.Input(id="input-fundo", type="text", value="", className="input-field")
+            html.Label("Selecione o Fundo:", className="label"),
+            dcc.Dropdown(id="input-fundo", options=fund_options, value="", className="input-field")
         ]),
         dbc.Col([
             html.Label("Valor de Compra:", className="label"),
