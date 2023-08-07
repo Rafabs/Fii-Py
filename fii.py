@@ -75,8 +75,8 @@ app.layout = dbc.Container([
     [
         dash.dependencies.State("input-fundo", "value"),
         dash.dependencies.State("input-valor-compra", "value"),
+        dash.dependencies.State("input-cotas-compradas", "value"),        
         dash.dependencies.State("input-valor-venda", "value"),
-        dash.dependencies.State("input-cotas-compradas", "value"),
         dash.dependencies.State("input-cotas-venda", "value"),
     ],
 )
