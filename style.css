@@ -72,7 +72,8 @@ label {
 
 /* Additional margin for the footer */
 .footer {
-  margin-bottom: 20px;
-  justify-items: auto;
-  color: #8d8d8d; 
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
 }

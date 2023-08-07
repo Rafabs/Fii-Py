@@ -21,7 +21,7 @@ def calcular_ponto_medio(valor_compra, valor_venda):
 def calcular_lucro_prejuizo(valor_compra, valor_venda, quantidade_cotas):
     return (valor_venda - valor_compra) * quantidade_cotas
 
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.CYBORG])
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.CYBORG, "styles.css"])
 
 # Read the CSV file and populate the fund options dynamically
 csv_file_path = "fundosListados.csv"
