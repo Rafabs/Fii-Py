@@ -3,7 +3,7 @@ import dash
 from dash import dcc, html
 import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output
-from fund_list import fund_options  # Import the list of fund options
+import pandas as pd  # Import the pandas library to read CSV files
 
 def obter_valor_atual(fundo):
     ticker = f"{fundo}.SA"
@@ -22,6 +22,12 @@ def calcular_lucro_prejuizo(valor_compra, valor_venda, quantidade_cotas):
     return (valor_venda - valor_compra) * quantidade_cotas
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.CYBORG])
+
+# Read the CSV file and populate the fund options dynamically
+csv_file_path = "fundosListados.csv"
+fund_options_df = pd.read_csv(csv_file_path, usecols=["Razão Social", "Código"])
+fund_options_df.rename(columns={"Código": "value", "Razão Social": "label"}, inplace=True)
+fund_options = fund_options_df.to_dict('records')
 
 app.layout = dbc.Container([
     html.H1("Análise de Fundos Imobiliários", className="h1"),
