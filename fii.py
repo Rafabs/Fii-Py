@@ -30,7 +30,7 @@ fund_options_df.rename(columns={"Código": "value"}, inplace=True)
 fund_options = fund_options_df["value"].tolist()
 
 app.layout = dbc.Container([
-    html.H1("Análise de Fundos Imobiliários", className="h4"),
+    html.H1("Análise de Fundos Imobiliários", className="h1"),
     dbc.Row([
         dbc.Col([
             html.Label("Selecione o Fundo:", className="label"),
@@ -45,8 +45,12 @@ app.layout = dbc.Container([
             dcc.Input(id="input-valor-venda", type="number", value="", className="input-field")
         ]),
         dbc.Col([
-            html.Label("Quantidade de Cotas:", className="label"),
-            dcc.Input(id="input-quantidade-cotas", type="number", value="", className="input-field")
+            html.Label("Cotas Compradas:", className="label"),
+            dcc.Input(id="input-cotas-compradas", type="number", value="", className="input-field")
+        ]),
+        dbc.Col([
+            html.Label("Cotas para Venda:", className="label"),
+            dcc.Input(id="input-cotas-venda", type="number", value="", className="input-field")
         ]),
         dbc.Col([
             dbc.Button("Calcular", id="calcular-button", n_clicks=0, color="primary", className="mt-4")
@@ -72,25 +76,34 @@ app.layout = dbc.Container([
         dash.dependencies.State("input-fundo", "value"),
         dash.dependencies.State("input-valor-compra", "value"),
         dash.dependencies.State("input-valor-venda", "value"),
-        dash.dependencies.State("input-quantidade-cotas", "value"),
+        dash.dependencies.State("input-cotas-compradas", "value"),
+        dash.dependencies.State("input-cotas-venda", "value"),
     ],
 )
-def calcular_e_mostrar_resultado(n_clicks, fundo, valor_compra, valor_venda, quantidade_cotas):
+def calcular_e_mostrar_resultado(n_clicks, fundo, valor_compra, valor_venda, cotas_compradas, cotas_venda):
     if n_clicks > 0:
         valor_atual = obter_valor_atual(fundo)
         if valor_atual is not None:
             ponto_medio = calcular_ponto_medio(valor_compra, valor_venda)
-            lucro_prejuizo = calcular_lucro_prejuizo(valor_compra, valor_venda, quantidade_cotas)
+            lucro_prejuizo_compradas = calcular_lucro_prejuizo(valor_compra, valor_atual, cotas_compradas)
+            lucro_prejuizo_venda = calcular_lucro_prejuizo(valor_venda, valor_atual, cotas_venda)
 
             resultado_text = f"Valor atual do fundo {fundo}: R${valor_atual:.2f}\n"
             resultado_text += f"Ponto médio da operação: R${ponto_medio:.2f}\n"
 
-            if lucro_prejuizo > 0:
-                resultado_text += f"Lucro da operação: R${lucro_prejuizo:.2f}\n"
-            elif lucro_prejuizo < 0:
-                resultado_text += f"Prejuízo da operação: R${abs(lucro_prejuizo):.2f}\n"
+            if lucro_prejuizo_compradas > 0:
+                resultado_text += f"Lucro das cotas compradas: R${lucro_prejuizo_compradas:.2f}\n"
+            elif lucro_prejuizo_compradas < 0:
+                resultado_text += f"Prejuízo das cotas compradas: R${abs(lucro_prejuizo_compradas):.2f}\n"
             else:
-                resultado_text += f"A operação ficou no ponto de equilíbrio. Não houve lucro nem prejuízo."
+                resultado_text += f"As cotas compradas ficaram no ponto de equilíbrio. Não houve lucro nem prejuízo.\n"
+
+            if lucro_prejuizo_venda > 0:
+                resultado_text += f"Lucro das cotas para venda: R${lucro_prejuizo_venda:.2f}\n"
+            elif lucro_prejuizo_venda < 0:
+                resultado_text += f"Prejuízo das cotas para venda: R${abs(lucro_prejuizo_venda):.2f}\n"
+            else:
+                resultado_text += f"As cotas para venda ficaram no ponto de equilíbrio. Não houve lucro nem prejuízo.\n"
 
             return html.Div([dcc.Markdown(resultado_text)], style={"margin-top": "20px"})
 
