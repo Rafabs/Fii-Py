@@ -20,42 +20,41 @@ def calcular_ponto_medio(valor_compra, valor_venda):
 def calcular_lucro_prejuizo(valor_compra, valor_venda, quantidade_cotas):
     return (valor_venda - valor_compra) * quantidade_cotas
 
-app = dash.Dash(__name__)
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 app.layout = dbc.Container([
-    html.H1("Análise de Fundos Imobiliários", className="mt-5"),
+    html.H1("Análise de Fundos Imobiliários", className="h1"),
     dbc.Row([
         dbc.Col([
-            html.Label("Código do Fundo:"),
-            dcc.Input(id="input-fundo", type="text", value="", style={"width": "100%"})
+            html.Label("Código do Fundo:", className="label"),
+            dcc.Input(id="input-fundo", type="text", value="", className="input-field")
         ]),
         dbc.Col([
-            html.Label("Valor de Compra:"),
-            dcc.Input(id="input-valor-compra", type="number", value="", style={"width": "100%"})
+            html.Label("Valor de Compra:", className="label"),
+            dcc.Input(id="input-valor-compra", type="number", value="", className="input-field")
         ]),
         dbc.Col([
-            html.Label("Valor de Venda:"),
-            dcc.Input(id="input-valor-venda", type="number", value="", style={"width": "100%"})
+            html.Label("Valor de Venda:", className="label"),
+            dcc.Input(id="input-valor-venda", type="number", value="", className="input-field")
         ]),
         dbc.Col([
-            html.Label("Quantidade de Cotas:"),
-            dcc.Input(id="input-quantidade-cotas", type="number", value="", style={"width": "100%"})
+            html.Label("Quantidade de Cotas:", className="label"),
+            dcc.Input(id="input-quantidade-cotas", type="number", value="", className="input-field")
         ]),
         dbc.Col([
             dbc.Button("Calcular", id="calcular-button", n_clicks=0, color="primary", className="mt-4")
         ])
-    ]),
-    html.Div(id="resultado-container", className="mt-4"),
+    ], className="col"),
+    html.Div(id="resultado-container", className="resultado-container"),
 
     # Footer
     dbc.NavbarSimple(
         children=[
-            dbc.NavItem(f"Desenvolvido por Rafael Barbosa | 2023")
+            dbc.NavItem("Desenvolvido por Rafael Barbosa | 2023", className="navbar")
         ],
         color="dark",
         dark=True,
-        className="mt-4",
-        style={"position": "fixed", "bottom": 0, "width": "100%"}
+        className="footer"
     )    
 ], fluid=True)
 
