@@ -64,6 +64,6 @@ label {
 /* Additional margin for the footer */
 .footer {
   margin-bottom: 20px;
-  justify-items: center;
+  justify-items: auto;
   color: #8d8d8d; 
 }
