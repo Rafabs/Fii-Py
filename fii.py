@@ -5,6 +5,10 @@ import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output
 import pandas as pd
 
+'''
+AJUSTAR CÁLCULOS DE PONTO MÉDIO
+'''
+
 def obter_valor_atual(fundo):
     ticker = f"{fundo}.SA"
     fundo_info = yf.Ticker(ticker)
@@ -133,6 +137,17 @@ app.layout = dbc.Container([
 )
 def calcular_e_mostrar_resultado(n_clicks, fundo, valor_compra, cotas_compradas, valor_compra_2, cotas_compradas_2, valor_compra_3, cotas_compradas_3, valor_compra_4, cotas_compradas_4, valor_venda, cotas_venda):
     if n_clicks > 0:
+        valor_compra = float(valor_compra) if valor_compra else 0
+        cotas_compradas = float(cotas_compradas) if cotas_compradas else 0
+        valor_compra_2 = float(valor_compra_2) if valor_compra_2 else 0
+        cotas_compradas_2 = float(cotas_compradas_2) if cotas_compradas_2 else 0
+        valor_compra_3 = float(valor_compra_3) if valor_compra_3 else 0
+        cotas_compradas_3 = float(cotas_compradas_3) if cotas_compradas_3 else 0
+        valor_compra_4 = float(valor_compra_4) if valor_compra_4 else 0
+        cotas_compradas_4 = float(cotas_compradas_4) if cotas_compradas_4 else 0
+        valor_venda = float(valor_venda) if valor_venda else 0
+        cotas_venda = float(cotas_venda) if cotas_venda else 0
+        
         valor_atual = obter_valor_atual(fundo)
         if valor_atual is not None:
             compras = [
