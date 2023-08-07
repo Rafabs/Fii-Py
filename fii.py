@@ -25,16 +25,16 @@ app = dash.Dash(__name__, external_stylesheets=[dbc.themes.CYBORG])
 
 # Read the CSV file and populate the fund options dynamically
 csv_file_path = "fundosListados.csv"
-fund_options_df = pd.read_csv(csv_file_path, usecols=["Razão Social", "Código"])
-fund_options_df.rename(columns={"Código": "value", "Razão Social": "label"}, inplace=True)
-fund_options = fund_options_df.to_dict('records')
+fund_options_df = pd.read_csv(csv_file_path, delimiter=";", usecols=["Código"], encoding="ISO-8859-1")
+fund_options_df.rename(columns={"Código": "value"}, inplace=True)
+fund_options = fund_options_df["value"].tolist()
 
 app.layout = dbc.Container([
-    html.H1("Análise de Fundos Imobiliários", className="h1"),
+    html.H1("Análise de Fundos Imobiliários", className="h4"),
     dbc.Row([
         dbc.Col([
             html.Label("Selecione o Fundo:", className="label"),
-            dcc.Dropdown(id="input-fundo", options=fund_options, value="", className="input-field")
+            dcc.Dropdown(id="input-fundo", options=[{"label": fundo, "value": fundo} for fundo in fund_options], value="", className="input-field")
         ]),
         dbc.Col([
             html.Label("Valor de Compra:", className="label"),

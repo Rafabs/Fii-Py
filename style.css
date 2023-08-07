@@ -41,7 +41,7 @@ body {
 }
 
 /* Center the header text */
-h1 {
+h4 {
   text-align: center;
   color: #007bff; /* Blue */
 }
@@ -64,6 +64,6 @@ label {
 /* Additional margin for the footer */
 .footer {
   margin-bottom: 20px;
-  justify-content: center;
+  justify-items: center;
   color: #8d8d8d; 
 }
