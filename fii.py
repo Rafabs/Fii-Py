@@ -37,19 +37,19 @@ app.layout = dbc.Container([
             dcc.Dropdown(id="input-fundo", options=[{"label": fundo, "value": fundo} for fundo in fund_options], value="", className="input-field")
         ]),
         dbc.Col([
-            html.Label("Valor de Compra:", className="label"),
+            html.Label("Valor de Compra:", className="label_compra"),
             dcc.Input(id="input-valor-compra", type="number", value="", className="input-field")
         ]),
         dbc.Col([
-            html.Label("Cotas Compra:", className="label"),
+            html.Label("Cotas Compra:", className="label_compra"),
             dcc.Input(id="input-cotas-compradas", type="number", value="", className="input-field")
         ]),        
         dbc.Col([
-            html.Label("Valor de Venda:", className="label"),
+            html.Label("Valor de Venda:", className="label_venda"),
             dcc.Input(id="input-valor-venda", type="number", value="", className="input-field")
         ]),
         dbc.Col([
-            html.Label("Cotas Venda:", className="label"),
+            html.Label("Cotas Venda:", className="label_venda"),
             dcc.Input(id="input-cotas-venda", type="number", value="", className="input-field")
         ]),
         dbc.Col([

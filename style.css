@@ -1,5 +1,5 @@
 /* Set the background color for the entire page */
-body {
+.body {
   background-color: #343a40; /* Dark Gray */
   color: rgb(44, 43, 43);
 }
