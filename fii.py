@@ -50,7 +50,7 @@ app.layout = dbc.Container([
     # Footer
     dbc.NavbarSimple(
         children=[
-            dbc.NavItem("Desenvolvido por Rafael Barbosa | 2023", className="navbar")
+            dbc.NavItem("Desenvolvido por Rafael Barbosa | 2023", className="footer")
         ],
         color="dark",
         dark=True,
