@@ -20,9 +20,9 @@ def obter_valor_atual(fundo):
         return None
 
 def calcular_ponto_medio(compras):
-    total_valor = sum(compra['Total'] for compra in compras)
-    total_cotas = sum(compra['Quantidade'] for compra in compras)
-    return total_valor / total_cotas
+    total_valor_quantidade = sum(compra['Total'] * compra['Quantidade'] for compra in compras)
+    total_quantidade = sum(compra['Quantidade'] for compra in compras)
+    return total_valor_quantidade / total_quantidade
 
 def calcular_lucro_prejuizo(valor_compra, valor_venda, quantidade_cotas):
     return (valor_venda - valor_compra) * quantidade_cotas
@@ -46,44 +46,71 @@ app.layout = dbc.Container([
         dbc.CardBody([
             dbc.Row([
                 dbc.Col([
-                    html.Label("Compra 1 - Valor:", className="label_compra"),
+                    html.Label("Compra 1 (R$)", className="label_compra"),
                     dcc.Input(id="input-valor-compra", type="number", value="", className="input-field")
                 ]),
                 dbc.Col([
-                    html.Label("Compra 1 - Cotas:", className="label_compra"),
+                    html.Label("Qtd. Cotas", className="label_compra"),
                     dcc.Input(id="input-cotas-compradas", type="number", value="", className="input-field")
                 ]),        
             ]),
             dbc.Row([
                 dbc.Col([
-                    html.Label("Compra 2 - Valor:", className="label_compra"),
+                    html.Label("Compra 2 (R$)", className="label_compra"),
                     dcc.Input(id="input-valor-compra-2", type="number", value="", className="input-field")
                 ]),
                 dbc.Col([
-                    html.Label("Compra 2 - Cotas:", className="label_compra"),
+                    html.Label("Qtd. Cotas", className="label_compra"),
                     dcc.Input(id="input-cotas-compradas-2", type="number", value="", className="input-field")
                 ]),        
             ]),
             dbc.Row([
                 dbc.Col([
-                    html.Label("Compra 3 - Valor:", className="label_compra"),
+                    html.Label("Compra 3 (R$)", className="label_compra"),
                     dcc.Input(id="input-valor-compra-3", type="number", value="", className="input-field")
                 ]),
                 dbc.Col([
-                    html.Label("Compra 3 - Cotas:", className="label_compra"),
+                    html.Label("Qtd. Cotas", className="label_compra"),
                     dcc.Input(id="input-cotas-compradas-3", type="number", value="", className="input-field")
                 ]),        
             ]),
             dbc.Row([
                 dbc.Col([
-                    html.Label("Compra 4 - Valor:", className="label_compra"),
+                    html.Label("Compra 4 (R$)", className="label_compra"),
                     dcc.Input(id="input-valor-compra-4", type="number", value="", className="input-field")
                 ]),
                 dbc.Col([
-                    html.Label("Compra 4 - Cotas:", className="label_compra"),
+                    html.Label("Qtd. Cotas", className="label_compra"),
                     dcc.Input(id="input-cotas-compradas-4", type="number", value="", className="input-field")
                 ]),        
             ]),
+            dbc.Row([
+                dbc.Col([
+                    html.Label("Compra 5 (R$)", className="label_compra"),
+                    dcc.Input(id="input-valor-compra-5", type="number", value="", className="input-field")
+                ]),
+                dbc.Col([
+                    html.Label("Qtd. Cotas", className="label_compra"),
+                    dcc.Input(id="input-cotas-compradas-5", type="number", value="", className="input-field")
+                ]),        
+            ]),
+            dbc.Row([
+                dbc.Col([
+                    html.Label("Compra 6 (R$)", className="label_compra"),
+                    dcc.Input(id="input-valor-compra-6", type="number", value="", className="input-field")
+                ]),
+                dbc.Col([
+                    html.Label("Qtd. Cotas", className="label_compra"),
+                    dcc.Input(id="input-cotas-compradas-6", type="number", value="", className="input-field")
+                ]),        
+            ]),                        
+            dbc.CardBody([
+                dbc.Row([
+                    dbc.Col([
+                        html.Label(f"Ponto Médio - (PM) = (Qtd_Cota1 * Valor_Cota1 + Qtd_Cota2 * Valor_Cota2 + Qtd_Cotan... * Valor_Cotan... / Qtd_Cota1 + Qtd_Cota2 + Qtd_Cotan...)\n", className="label_compra"),
+                    ]),  
+                ]),
+            ]),          
         ]),
         className="mt-3"
     ),
@@ -131,11 +158,15 @@ app.layout = dbc.Container([
         dash.dependencies.State("input-cotas-compradas-3", "value"),
         dash.dependencies.State("input-valor-compra-4", "value"),
         dash.dependencies.State("input-cotas-compradas-4", "value"),
+        dash.dependencies.State("input-valor-compra-5", "value"),
+        dash.dependencies.State("input-cotas-compradas-5", "value"),
+        dash.dependencies.State("input-valor-compra-6", "value"),
+        dash.dependencies.State("input-cotas-compradas-6", "value"),                
         dash.dependencies.State("input-valor-venda", "value"),
         dash.dependencies.State("input-cotas-venda", "value"),
     ],
 )
-def calcular_e_mostrar_resultado(n_clicks, fundo, valor_compra, cotas_compradas, valor_compra_2, cotas_compradas_2, valor_compra_3, cotas_compradas_3, valor_compra_4, cotas_compradas_4, valor_venda, cotas_venda):
+def calcular_e_mostrar_resultado(n_clicks, fundo, valor_compra, cotas_compradas, valor_compra_2, cotas_compradas_2, valor_compra_3, cotas_compradas_3, valor_compra_4, cotas_compradas_4, valor_compra_5, cotas_compradas_5, valor_compra_6, cotas_compradas_6, valor_venda, cotas_venda):
     if n_clicks > 0:
         valor_compra = float(valor_compra) if valor_compra else 0
         cotas_compradas = float(cotas_compradas) if cotas_compradas else 0
@@ -145,6 +176,10 @@ def calcular_e_mostrar_resultado(n_clicks, fundo, valor_compra, cotas_compradas,
         cotas_compradas_3 = float(cotas_compradas_3) if cotas_compradas_3 else 0
         valor_compra_4 = float(valor_compra_4) if valor_compra_4 else 0
         cotas_compradas_4 = float(cotas_compradas_4) if cotas_compradas_4 else 0
+        valor_compra_5 = float(valor_compra_5) if valor_compra_5 else 0
+        cotas_compradas_5 = float(cotas_compradas_5) if cotas_compradas_5 else 0
+        valor_compra_6 = float(valor_compra_6) if valor_compra_6 else 0
+        cotas_compradas_6 = float(cotas_compradas_6) if cotas_compradas_6 else 0                
         valor_venda = float(valor_venda) if valor_venda else 0
         cotas_venda = float(cotas_venda) if cotas_venda else 0
         
@@ -155,6 +190,8 @@ def calcular_e_mostrar_resultado(n_clicks, fundo, valor_compra, cotas_compradas,
                 {'Quantidade': cotas_compradas_2, 'Total': valor_compra_2},
                 {'Quantidade': cotas_compradas_3, 'Total': valor_compra_3},
                 {'Quantidade': cotas_compradas_4, 'Total': valor_compra_4},
+                {'Quantidade': cotas_compradas_5, 'Total': valor_compra_5},
+                {'Quantidade': cotas_compradas_6, 'Total': valor_compra_6},
             ]
             ponto_medio = calcular_ponto_medio(compras)
             lucro_prejuizo_compradas = calcular_lucro_prejuizo(valor_compra, valor_atual, cotas_compradas)
