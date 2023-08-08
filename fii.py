@@ -126,6 +126,7 @@ app.layout = dbc.Container([
                     dcc.Input(id="input-cotas-venda", type="number", value="", className="input-field")
                 ]),
             ]),
+            html.Br(),
             dbc.Row([
                 dbc.Col([
                     dbc.Button("Calcular", id="calcular-button", n_clicks=0, color="primary", className="mt-4")
@@ -137,13 +138,9 @@ app.layout = dbc.Container([
     html.Div(id="resultado-container", className="resultado-container"),
     dbc.NavbarSimple(
         children=[
-            dbc.NavItem("Desenvolvido por Rafael Barbosa | 2023", className="footer")
-        ],
-        color="dark",
-        dark=True,
-        className="footer"
-    )    
-], fluid=True)
+            dbc.NavItem("Desenvolvido por Rafael Barbosa | 2023", className="footer")], 
+fluid=True)
+])
 
 @app.callback(
     Output("resultado-container", "children"),
@@ -219,5 +216,12 @@ def calcular_e_mostrar_resultado(n_clicks, fundo, valor_compra, cotas_compradas,
         else:
             return html.Div([html.H4(f"Fundo '{fundo}' não encontrado ou não disponível no Yahoo Finance.")])
 
-if __name__ == "__main__":
-    app.run_server(debug=True)
+def run_server(self,
+               port=8050,
+               debug=True,
+               threaded=True,
+               **flask_run_options):
+    self.server.run(port=port, debug=debug, **flask_run_options)
+
+if __name__ == '__main__':
+    app.run_server(debug=True, port=8051) # or whatever you choose
