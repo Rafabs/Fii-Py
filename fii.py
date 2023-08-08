@@ -224,4 +224,4 @@ def run_server(self,
     self.server.run(port=port, debug=debug, **flask_run_options)
 
 if __name__ == '__main__':
-    app.run_server(debug=True, port=8051) # or whatever you choose
+    app.run_server(debug=True, port=8051)
