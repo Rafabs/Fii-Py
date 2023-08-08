@@ -194,22 +194,22 @@ def calcular_e_mostrar_resultado(n_clicks, fundo, valor_compra, cotas_compradas,
             lucro_prejuizo_compradas = calcular_lucro_prejuizo(valor_compra, valor_atual, cotas_compradas)
             lucro_prejuizo_venda = calcular_lucro_prejuizo(valor_venda, valor_atual, cotas_venda)
 
-            resultado_text = f"Valor atual do fundo {fundo}: R${valor_atual:.2f}\n"
-            resultado_text += f"Ponto médio da operação: R${ponto_medio:.2f}\n"
+            resultado_text = f"Valor atual do fundo {fundo}: R${valor_atual:.2f}  \n"
+            resultado_text += f"Ponto médio da operação: R${ponto_medio:.2f}  \n"
 
             if lucro_prejuizo_compradas > 0:
-                resultado_text += f"Lucro das cotas compradas: R${lucro_prejuizo_compradas:.2f}\n"
+                resultado_text += f"Lucro das cotas compradas: R${lucro_prejuizo_compradas:.2f}  \n"
             elif lucro_prejuizo_compradas < 0:
-                resultado_text += f"Prejuízo das cotas compradas: R${abs(lucro_prejuizo_compradas):.2f}\n"
+                resultado_text += f"Prejuízo das cotas compradas: R${abs(lucro_prejuizo_compradas):.2f}  \n"
             else:
-                resultado_text += f"As cotas compradas ficaram no ponto de equilíbrio. Não houve lucro nem prejuízo.\n"
+                resultado_text += f"As cotas compradas ficaram no ponto de equilíbrio. Não houve lucro nem prejuízo.  \n"
 
             if lucro_prejuizo_venda > 0:
-                resultado_text += f"Lucro das cotas para venda: R${lucro_prejuizo_venda:.2f}\n"
+                resultado_text += f"Lucro das cotas para venda: R${lucro_prejuizo_venda:.2f}  \n"
             elif lucro_prejuizo_venda < 0:
-                resultado_text += f"Prejuízo das cotas para venda: R${abs(lucro_prejuizo_venda):.2f}\n"
+                resultado_text += f"Prejuízo das cotas para venda: R${abs(lucro_prejuizo_venda):.2f}  \n"
             else:
-                resultado_text += f"As cotas para venda ficaram no ponto de equilíbrio. Não houve lucro nem prejuízo.\n"
+                resultado_text += f"As cotas para venda ficaram no ponto de equilíbrio. Não houve lucro nem prejuízo.  \n"
 
             return html.Div([dcc.Markdown(resultado_text)], style={"margin-top": "20px"})
 
