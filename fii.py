@@ -5,6 +5,14 @@ import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output
 import pandas as pd
 
+cor_titulo = {"font-size": "40px", "text-align": "center", "color": "#007bff"}
+cor_selecao_fundo = {"font-size": "20px", "text-align": "center", "color": "#acacac"}
+cor_valor_compra = {"font-size": "16px", "color": "#00ff04"}
+cor_cota_compra = {"font-size": "16px", "color": "#00ff60"}
+cor_valor_venda = {"font-size": "16px", "color": "#001aff"}
+cor_cota_venda = {"font-size": "16px", "color": "#001aaa"}
+footer = {"width": "100%", "text-align": "center"} 
+
 def obter_valor_atual(fundo):
     ticker = f"{fundo}.SA"
     fundo_info = yf.Ticker(ticker)
@@ -31,10 +39,10 @@ fund_options_df.rename(columns={"Código": "value"}, inplace=True)
 fund_options = fund_options_df["value"].tolist()
 
 app.layout = dbc.Container([
-    html.H1("Análise de Fundos Imobiliários", className="h1"),
+    html.H1("Análise de Fundos Imobiliários", style = cor_titulo),
     dbc.Row([
         dbc.Col([
-            html.Label("Selecione o Fundo:", className="label"),
+            html.Label("Selecione o Fundo:", className="label", style = cor_selecao_fundo),
             dcc.Dropdown(id="input-fundo", options=[{"label": fundo, "value": fundo} for fundo in fund_options], value="", className="input-field")
         ]),
     ]),
@@ -42,68 +50,68 @@ app.layout = dbc.Container([
         dbc.CardBody([
             dbc.Row([
                 dbc.Col([
-                    html.Label("Compra 1 (R$)", className="label_compra"),
-                    dcc.Input(id="input-valor-compra", type="number", value="", className="input-field")
+                    html.Label("Compra 1 (R$)", style = cor_valor_compra),
+                    dcc.Input(id="input-valor-compra", type="number", value="", className="input-field") 
                 ]),
                 dbc.Col([
-                    html.Label("Qtd. Cotas", className="label_compra"),
+                    html.Label("Qtd. Cotas", style = cor_cota_compra),
                     dcc.Input(id="input-cotas-compradas", type="number", value="", className="input-field")
                 ]),        
             ]),
             dbc.Row([
                 dbc.Col([
-                    html.Label("Compra 2 (R$)", className="label_compra"),
+                    html.Label("Compra 2 (R$)", style = cor_valor_compra),
                     dcc.Input(id="input-valor-compra-2", type="number", value="", className="input-field")
                 ]),
                 dbc.Col([
-                    html.Label("Qtd. Cotas", className="label_compra"),
+                    html.Label("Qtd. Cotas", style = cor_cota_compra),
                     dcc.Input(id="input-cotas-compradas-2", type="number", value="", className="input-field")
                 ]),        
             ]),
             dbc.Row([
                 dbc.Col([
-                    html.Label("Compra 3 (R$)", className="label_compra"),
+                    html.Label("Compra 3 (R$)", style = cor_valor_compra),
                     dcc.Input(id="input-valor-compra-3", type="number", value="", className="input-field")
                 ]),
                 dbc.Col([
-                    html.Label("Qtd. Cotas", className="label_compra"),
+                    html.Label("Qtd. Cotas", style = cor_cota_compra),
                     dcc.Input(id="input-cotas-compradas-3", type="number", value="", className="input-field")
                 ]),        
             ]),
             dbc.Row([
                 dbc.Col([
-                    html.Label("Compra 4 (R$)", className="label_compra"),
+                    html.Label("Compra 4 (R$)", style = cor_valor_compra),
                     dcc.Input(id="input-valor-compra-4", type="number", value="", className="input-field")
                 ]),
                 dbc.Col([
-                    html.Label("Qtd. Cotas", className="label_compra"),
+                    html.Label("Qtd. Cotas", style = cor_cota_compra),
                     dcc.Input(id="input-cotas-compradas-4", type="number", value="", className="input-field")
                 ]),        
             ]),
             dbc.Row([
                 dbc.Col([
-                    html.Label("Compra 5 (R$)", className="label_compra"),
+                    html.Label("Compra 5 (R$)", style = cor_valor_compra),
                     dcc.Input(id="input-valor-compra-5", type="number", value="", className="input-field")
                 ]),
                 dbc.Col([
-                    html.Label("Qtd. Cotas", className="label_compra"),
+                    html.Label("Qtd. Cotas", style = cor_cota_compra),
                     dcc.Input(id="input-cotas-compradas-5", type="number", value="", className="input-field")
                 ]),        
             ]),
             dbc.Row([
                 dbc.Col([
-                    html.Label("Compra 6 (R$)", className="label_compra"),
+                    html.Label("Compra 6 (R$)", style = cor_valor_compra),
                     dcc.Input(id="input-valor-compra-6", type="number", value="", className="input-field")
                 ]),
                 dbc.Col([
-                    html.Label("Qtd. Cotas", className="label_compra"),
+                    html.Label("Qtd. Cotas", style = cor_cota_compra),
                     dcc.Input(id="input-cotas-compradas-6", type="number", value="", className="input-field")
                 ]),        
             ]),                        
             dbc.CardBody([
                 dbc.Row([
                     dbc.Col([
-                        html.Label(f"Ponto Médio - (PM) = (Qtd_Cota1 * Valor_Cota1 + Qtd_Cota2 * Valor_Cota2 + Qtd_Cotan... * Valor_Cotan... / Qtd_Cota1 + Qtd_Cota2 + Qtd_Cotan...)\n", className="label_compra"),
+                        html.Label(f"Ponto Médio - (PM) = (Qtd_Cota1 * Valor_Cota1 + Qtd_Cota2 * Valor_Cota2 + ... / Qtd_Cota1 + Qtd_Cota2 + ...)\n", className="label_compra"),
                     ]),  
                 ]),
             ]),          
@@ -114,11 +122,11 @@ app.layout = dbc.Container([
         dbc.CardBody([
             dbc.Row([
                 dbc.Col([
-                    html.Label("Valor de Venda:", className="label_venda"),
+                    html.Label("Valor de Venda:", style = cor_valor_venda),
                     dcc.Input(id="input-valor-venda", type="number", value="", className="input-field")
                 ]),
                 dbc.Col([
-                    html.Label("Cotas Venda:", className="label_venda"),
+                    html.Label("Cotas Venda:", style = cor_cota_venda),
                     dcc.Input(id="input-cotas-venda", type="number", value="", className="input-field")
                 ]),
             ]),
@@ -134,7 +142,7 @@ app.layout = dbc.Container([
     html.Div(id="resultado-container", className="resultado-container"),
     dbc.NavbarSimple(
         children=[
-            dbc.NavItem("Desenvolvido por Rafael Barbosa | 2023", className="footer")], 
+            dbc.NavItem("Desenvolvido por Rafael Barbosa | 2023", style = footer)], 
 fluid=True)
 ])
 
