@@ -5,10 +5,6 @@ import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output
 import pandas as pd
 
-'''
-AJUSTAR CÁLCULOS DE PONTO MÉDIO
-'''
-
 def obter_valor_atual(fundo):
     ticker = f"{fundo}.SA"
     fundo_info = yf.Ticker(ticker)
