@@ -198,7 +198,7 @@ def calcular_e_mostrar_resultado(n_clicks, fundo, valor_compra, cotas_compradas,
             lucro_prejuizo_compradas = calcular_lucro_prejuizo(valor_compra, valor_atual, cotas_compradas)
             lucro_prejuizo_venda = calcular_lucro_prejuizo(valor_venda, valor_atual, cotas_venda)
 
-            resultado_text = f"Valor atual do fundo {fundo}: R${valor_atual:.2f}  \n"
+            resultado_text = f"Valor atual do fundo {fundo}: R${valor_atual:.2f}  \n" 
             resultado_text += f"Ponto médio da operação: R${ponto_medio:.2f}  \n"
 
             if lucro_prejuizo_compradas > 0:
