@@ -47,6 +47,3 @@ O aplicativo será executado e estará disponível em http://127.0.0.1:8050/ no 
     Dash Bootstrap Components
     Contribuição
     Se você quiser contribuir com melhorias ou correções, fique à vontade para criar um fork deste repositório, fazer as alterações desejadas e enviar um pull request. Será um prazer revisar e mesclar suas contribuições.
-
-## Licença
-    Este projeto está licenciado sob a MIT License.
