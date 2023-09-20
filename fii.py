@@ -11,7 +11,7 @@ cor_valor_compra = {"font-size": "16px", "color": "#00ff04"}
 cor_cota_compra = {"font-size": "16px", "color": "#00ff60"}
 cor_valor_venda = {"font-size": "16px", "color": "#001aff"}
 cor_cota_venda = {"font-size": "16px", "color": "#001aaa"}
-footer = {"width": "100%", "text-align": "center"} 
+footer = {"width": "100%", "text-align": "center", "color": "#000444"} 
 
 def obter_valor_atual(fundo):
     ticker = f"{fundo}.SA"
@@ -198,27 +198,193 @@ def calcular_e_mostrar_resultado(n_clicks, fundo, valor_compra, cotas_compradas,
             lucro_prejuizo_compradas = calcular_lucro_prejuizo(valor_compra, valor_atual, cotas_compradas)
             lucro_prejuizo_venda = calcular_lucro_prejuizo(valor_venda, valor_atual, cotas_venda)
 
-            resultado_text = f"Valor atual do fundo {fundo}: R${valor_atual:.2f}  \n" 
-            resultado_text += f"Ponto médio da operação: R${ponto_medio:.2f}  \n"
+            html.Hr(style={"margin-top": "20px", "margin-bottom": "20px"}),  # Adiciona a linha horizontal
+
+            resultado_div = [
+                dbc.Card(
+                    dbc.CardBody([
+                        dbc.Row([
+                            dbc.Col([
+                                html.P(f"Valor atual do fundo {fundo} ", style={"font-weight": "bold", "color": "cecece"}),
+                                dbc.CardBody([
+                                    html.P(f"R${valor_atual:.2f}")
+                                ],  style={ 'background': 'rgb(173, 216, 230)',
+                                            'border-radius': '7px',
+                                            'padding': '2px',
+                                            'font-family': "Arial",
+                                            'font-size': '15px',
+                                            'letter-spacing': '5px',
+                                            'color': 'rgb(0, 0, 139)',
+                                            'word-spacing': '1px',
+                                            'font-weight': '5',},) 
+                            ])
+                        ]) 
+                    ])
+                ),
+
+                html.Hr(style={"margin-top": "20px", "margin-bottom": "20px"}),  # Adiciona a linha horizontal
+
+                dbc.Card(
+                    dbc.CardBody([
+                        dbc.Row([
+                            dbc.Col([                
+                                html.P(f"Ponto médio da operação ", style={"font-weight": "bold", "color": "cecece"}),
+                                dbc.CardBody([
+                                    html.P(f"R${ponto_medio:.2f}")
+                                ],  style={ 'background': 'rgb(0, 0, 139)',
+                                            'border-radius': '7px',
+                                            'padding': '2px',
+                                            'font-family': "Arial",
+                                            'font-size': '15px',
+                                            'letter-spacing': '5px',
+                                            'color': 'rgb(90, 255, 255)',
+                                            'word-spacing': '1px',
+                                            'font-weight': '5',},) 
+                            ])
+                        ]) 
+                    ])
+                ),
+
+                html.Hr(style={"margin-top": "20px", "margin-bottom": "20px"}),  # Adiciona a linha horizontal
+            ]
 
             if lucro_prejuizo_compradas > 0:
-                resultado_text += f"Lucro das cotas compradas: R${lucro_prejuizo_compradas:.2f}  \n"
+                resultado_div.extend([
+                    dbc.Card(
+                        dbc.CardBody([
+                            dbc.Row([
+                                dbc.Col([
+                                    html.P(f"Lucro das cotas compradas ", style={"font-weight": "bold", "color": "cecece"}),
+                                    dbc.CardBody([
+                                        html.P(f"R${lucro_prejuizo_compradas:.2f}"),
+                                    ],  style={ 'background': 'rgb(0, 255, 0)',
+                                                'border-radius': '7px',
+                                                'padding': '2px',
+                                                'font-family': "Arial",
+                                                'font-size': '15px',
+                                                'letter-spacing': '5px',
+                                                'color': 'rgb(19, 72, 0)',
+                                                'word-spacing': '1px',
+                                                'font-weight': '5',},) 
+                                ])
+                            ]) 
+                        ])
+                    )
+                ])
             elif lucro_prejuizo_compradas < 0:
-                resultado_text += f"Prejuízo das cotas compradas: R${abs(lucro_prejuizo_compradas):.2f}  \n"
+                resultado_div.extend([
+                    dbc.Card(
+                        dbc.CardBody([
+                            dbc.Row([
+                                dbc.Col([
+                                    html.P(f"Prejuízo das cotas compradas ", style={"font-weight": "bold", "color": "cecece"}),
+                                    dbc.CardBody([
+                                        html.P(f"R${abs(lucro_prejuizo_compradas):.2f}"),
+                                    ],  style={ 'background': 'rgb(255, 0, 0)',
+                                                'border-radius': '7px',
+                                                'padding': '2px',
+                                                'font-family': "Arial",
+                                                'font-size': '15px',
+                                                'letter-spacing': '5px',
+                                                'color': 'rgb(72, 0, 0)',
+                                                'word-spacing': '1px',
+                                                'font-weight': '5',},) 
+                                ])
+                            ]) 
+                        ])
+                    )
+                ])
             else:
-                resultado_text += f"As cotas compradas ficaram no ponto de equilíbrio. Não houve lucro nem prejuízo.  \n"
+                resultado_div.extend([
+                    dbc.Card(
+                        dbc.CardBody([
+                            dbc.Row([
+                                dbc.Col([
+                                    html.P(f"As cotas compradas ficaram no ponto de equilíbrio. Não houve lucro nem prejuízo.", style={"font-weight": "bold",})
+                                ],  style={ 'background': 'rgb(49, 0, 49)',
+                                            'border-radius': '7px',
+                                            'padding': '2px',
+                                            'font-family': "Arial",
+                                            'font-size': '15px',
+                                            'letter-spacing': '5px',
+                                            'color': 'rgb(100, 0, 150)',
+                                            'word-spacing': '1px',
+                                            'font-weight': '5',},) 
+                            ]) 
+                        ])
+                    )
+                ])
+
+                html.Hr(style={"margin-top": "20px", "margin-bottom": "20px"}),  # Adiciona a linha horizontal
 
             if lucro_prejuizo_venda > 0:
-                resultado_text += f"Lucro das cotas para venda: R${lucro_prejuizo_venda:.2f}  \n"
+                resultado_div.extend([
+                    dbc.Card(
+                        dbc.CardBody([
+                            dbc.Row([
+                                dbc.Col([
+                                    html.P(f"Lucro das cotas para venda ", style={"font-weight": "bold", "color": "cecece"}),
+                                    dbc.CardBody([
+                                        html.P(f"R${lucro_prejuizo_venda:.2f}"),
+                                    ],  style={ 'background': 'rgb(0, 255, 0)',
+                                                'border-radius': '7px',
+                                                'padding': '2px',
+                                                'font-family': "Arial",
+                                                'font-size': '15px',
+                                                'letter-spacing': '5px',
+                                                'color': 'rgb(19, 72, 0)',
+                                                'word-spacing': '1px',
+                                                'font-weight': '5',},) 
+                                ])
+                            ]) 
+                        ])
+                    )
+                ])
             elif lucro_prejuizo_venda < 0:
-                resultado_text += f"Prejuízo das cotas para venda: R${abs(lucro_prejuizo_venda):.2f}  \n"
+                resultado_div.extend([
+                    dbc.Card(
+                        dbc.CardBody([
+                            dbc.Row([
+                                dbc.Col([
+                                    html.P(f"Prejuízo das cotas para venda ", style={"font-weight": "bold", "color": "cecece"}),
+                                    dbc.CardBody([
+                                        html.P(f"R${abs(lucro_prejuizo_venda):.2f}"),
+                                    ],  style={ 'background': 'rgb(255, 0, 0)',
+                                                'border-radius': '7px',
+                                                'padding': '2px',
+                                                'font-family': "Arial",
+                                                'font-size': '15px',
+                                                'letter-spacing': '5px',
+                                                'color': 'rgb(72, 0, 0)',
+                                                'word-spacing': '1px',
+                                                'font-weight': '5',},) 
+                                ])
+                            ]) 
+                        ])
+                    )
+                ])
             else:
-                resultado_text += f"As cotas para venda ficaram no ponto de equilíbrio. Não houve lucro nem prejuízo.  \n"
+                resultado_div.extend([
+                    dbc.Card(
+                        dbc.CardBody([
+                            dbc.Row([
+                                dbc.Col([
+                                    html.P(f"As cotas para venda ficaram no ponto de equilíbrio. Não houve lucro nem prejuízo.", style={"font-weight": "bold"})
+                                ],  style={ 'background': 'rgb(49, 0, 49)',
+                                            'border-radius': '7px',
+                                            'padding': '2px',
+                                            'font-family': "Arial",
+                                            'font-size': '15px',
+                                            'letter-spacing': '5px',
+                                            'color': 'rgb(100, 0, 150)',
+                                            'word-spacing': '1px',
+                                            'font-weight': '5',},) 
+                            ]) 
+                        ])
+                    )
+                ])
 
-            return html.Div([dcc.Markdown(resultado_text)], style={"margin-top": "20px"})
-
-        else:
-            return html.Div([html.H4(f"Fundo '{fundo}' não encontrado ou não disponível no Yahoo Finance.")])
+            return html.Div(resultado_div, style={"margin-top": "20px", "font-size": "18px"})
 
 def run_server(self,
                port=8050,
